@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konwerter Walut</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Konwerter Walut</h1>
+    <form action="/convert" method="post">
+        <label for="currency-select">Wybierz walutę:</label>
+        <select name="currency" id="currency-select">
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+            <option value="gbp">GBP</option>
+            <option value="aud">AUD</option>
+            <option value="cad">CAD</option>
+            <option value="huf">HUF</option>
+            <option value="chf">CHF</option>
+            <option value="jpy">JPY</option>
+            <option value="czk">CZK</option>
+            <option value="dkk">DKK</option>
+            <option value="nok">NOK</option>
+            <option value="sek">SEK</option>
+            <option value="xdr">XDR</option>
+        </select>
+        <br>
+        <label for="amount-input">Wpisz ilość:</label>
+        <input type="number" name="amount" id="amount-input">
+        <br>
+        <label for="start-date">Wybierz datę początkową:</label>
+        <input type="date" name="start_date" id="start-date">
+        <br>
+        <label for="end-date">Wybierz datę końcową:</label>
+        <input type="date" name="end_date" id="end-date">
+        <br>
+        <button type="submit">Konwertuj</button>
+    </form>
+    <div id="result">
+        {% if pln_value is defined %}
+            <p>Przewalutowana kwota: {{ pln_value }} PLN</p>
+        {% endif %}
+        {% if start_date is defined and end_date is defined and medium_value is defined %}
+            <p>Średnia cena z przedziału od {{ start_date }} do {{ end_date }} to {{ medium_value }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
