@@ -17,3 +17,21 @@ def get_exchange_rate(currency):
     except Exception as e:
         print(e)
         return None
+
+def get_hight_and_low_value(currency, date_from, date_to):
+    try:
+        response = requests.get(f'http://api.nbp.pl/api/exchangerates/rates/a/{currency}/{date_from}/{date_to}/?format=json')
+        data = response.json()
+        rates = data['rates']
+        max_rate = None
+        min_rate = None
+        for rate in rates:
+            mid = rate['mid']
+            if max_rate is None or mid > max_rate:
+                max_rate = mid
+            if min_rate is None or mid < min_rate:
+                min_rate = mid
+        return min_rate, max_rate, currency
+    except Exception as e:
+        print(e)
+        return None
